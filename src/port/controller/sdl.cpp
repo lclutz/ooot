@@ -464,9 +464,25 @@ namespace oot::hid
 				int16_t rtrig = SDL_GameControllerGetAxis(m_context, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
 
 				if(ltrig > 30 * 256)
+				{
+					// Left trigger down
 					m_state.button |= Z_TRIG;
+				}
+				else
+				{
+					// Left trigger up
+				}
+
 				if(rtrig > 30 * 256)
-					m_state.button |= R_TRIG;
+				{
+					// Right trigger down
+					oot::state.fastForward = config().game().fastForwardSpeed();
+				}
+				else
+				{
+					// Right trigger up
+					oot::state.fastForward = 1;
+				}
 
 				if(m_state.m_walk)
 				{
